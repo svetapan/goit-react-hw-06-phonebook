@@ -1,8 +1,16 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import css from './Filter.module.css';
+import { useDispatch } from 'react-redux';
+import { filterContact } from '../../store/reduser';
 
-const Filter = ({ value, onChange }) => {
+const Filter = ({ value }) => {
+  const dispatch = useDispatch();
+  
+  const handleInputChange = (event) => {
+    const newFilterValue = event.target.value;
+    dispatch(filterContact(newFilterValue));
+  };
+
   return (
     <label className={css.filterLabel}>
       Find contacts by name
@@ -10,15 +18,10 @@ const Filter = ({ value, onChange }) => {
         className={css.filterInput}
         type="text"
         value={value}
-        onChange={onChange}
+        onChange={handleInputChange}
       />
     </label>
   );
 };
 
 export default Filter;
-
-Filter.propTypes = {
-  value: PropTypes.string,
-  onChange: PropTypes.func,
-};

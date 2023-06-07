@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
 import css from './ContactListItem.module.css';
-
 import { useDispatch } from 'react-redux';
 import { deleteContact, updateContact } from '../../store/reduser';
 
-const ContactListItem = ({ contact, onDelete, onEdit }) => {
-  const dispatch = useDispatch();
-
+const ContactListItem = ({ contact }) => {
   const [isEdit, setIsEdit] = useState(false);
   const [name, setName] = useState(contact.name);
   const [number, setNumber] = useState(contact.number);
+  
+  const dispatch = useDispatch();
 
   const handleDelete = () => {
     dispatch(deleteContact(contact.id));
